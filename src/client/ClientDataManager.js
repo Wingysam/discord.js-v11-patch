@@ -11,6 +11,7 @@ const NewsChannel = require('../structures/NewsChannel');
 const StoreChannel = require('../structures/StoreChannel');
 const DMChannel = require('../structures/DMChannel');
 const GroupDMChannel = require('../structures/GroupDMChannel');
+const Channel = require('../structures/Channel');
 
 class ClientDataManager {
   constructor(client) {
@@ -76,6 +77,9 @@ class ClientDataManager {
           case Constants.ChannelTypes.STORE:
             channel = new StoreChannel(guild, data);
             break;
+          default: // attempted fix for stage channel crash
+            channel = new Channel(guild, data)
+            break
         }
 
         guild.channels.set(channel.id, channel);
