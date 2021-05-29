@@ -26,6 +26,7 @@ class VoiceStateUpdateHandler extends AbstractHandler {
 
         const newChannel = client.channels.get(data.channel_id);
         if (newChannel) {
+          if (!newChannel.members) return // patch to ignore stage channels
           newChannel.members.set(member.id, member);
           member.guild.channels.set(data.channel_id, newChannel);
         }
