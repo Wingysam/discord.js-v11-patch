@@ -327,7 +327,7 @@ class Guild {
         this._rawVoiceStates.set(voiceState.user_id, voiceState);
         const member = this.members.get(voiceState.user_id);
         const voiceChannel = this.channels.get(voiceState.channel_id);
-        if (member && voiceChannel) {
+        if (member && voiceChannel && voiceChannel.members) {
           member.serverMute = voiceState.mute;
           member.serverDeaf = voiceState.deaf;
           member.selfMute = voiceState.self_mute;
